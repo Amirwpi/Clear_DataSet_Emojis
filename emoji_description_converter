@@ -1,0 +1,20 @@
+import pandas as pd
+import emoji
+
+# Put the input and output path as well as title of columns!
+input_path = r'Z:\file.csv'
+output_path = r'Z:\file2.csv'
+Columnname="name of column"
+
+def replace_emojis_with_description(text):
+    if not isinstance(text, str):
+        return ""
+    # Convert emojis to their textual descriptions with no delimiters
+    text_with_descriptions = emoji.demojize(text, delimiters=("", ""))
+    return text_with_descriptions
+
+df = pd.read_csv(input_path)
+
+df[Columnname] = df[Columnname].apply(replace_emojis_with_description)
+
+df.to_csv(output_path, index=False, encoding='utf-8-sig')
